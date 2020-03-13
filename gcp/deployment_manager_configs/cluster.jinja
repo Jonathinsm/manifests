@@ -60,7 +60,7 @@ resources:
     cluster:
       name: {{ CLUSTER_NAME }}
       network: projects/terpel-infra-vpc-dataleake/global/networks/k8-nodes-dataleake
-      subnetwork: projects/terpel-infra-vpc-dataleake/regions/<region>/subnetworks/terpel-infra-sharedvpc-dataleake
+      subnetwork: projects/terpel-infra-vpc-dataleake/regions/us-east1-b/subnetworks/terpel-infra-sharedvpc-dataleake
       initialClusterVersion: "{{ properties['cluster-version'] }}"
       resourceLabels:
         application: 'kubeflow'
