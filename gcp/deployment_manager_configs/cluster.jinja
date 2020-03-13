@@ -96,7 +96,7 @@ resources:
           {{ properties['securityConfig']['masterAuthorizedNetworksConfigCidr'] }}
         {% endif %}
       {% endif %}
-       ipAllocationPolicy:
+      ipAllocationPolicy:
         createSubnetwork: false
         useIpAliases: true
         clusterSecondaryRangeName: gtic-modelos-datalake-svpc-pods
