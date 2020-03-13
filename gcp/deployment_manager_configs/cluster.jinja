@@ -59,6 +59,8 @@ resources:
     zone: {{ properties['zone'] }}
     cluster:
       name: {{ CLUSTER_NAME }}
+      network: projects/terpel-infra-vpc-dataleake/global/networks/k8-nodes-dataleake
+      subnetwork: projects/terpel-infra-vpc-dataleake/regions/<region>/subnetworks/terpel-infra-sharedvpc-dataleake
       initialClusterVersion: "{{ properties['cluster-version'] }}"
       resourceLabels:
         application: 'kubeflow'
@@ -80,8 +82,10 @@ resources:
       {% endif %}
       {% if properties['securityConfig']['privatecluster'] %}
       ipAllocationPolicy:
-        createSubnetwork: true
+        createSubnetwork: false
         useIpAliases: true
+        clusterSecondaryRangeName: gtic-modelos-datalake-svpc-pods
+        servicesSecondaryRangeName: gtic-modelos-datalake-svpc-services
       privateClusterConfig:
         masterIpv4CidrBlock: {{ properties['securityConfig']['masterIpv4CidrBlock'] }}
         enablePrivateNodes: true
@@ -92,6 +96,11 @@ resources:
           {{ properties['securityConfig']['masterAuthorizedNetworksConfigCidr'] }}
         {% endif %}
       {% endif %}
+       ipAllocationPolicy:
+        createSubnetwork: false
+        useIpAliases: true
+        clusterSecondaryRangeName: gtic-modelos-datalake-svpc-pods
+        servicesSecondaryRangeName: gtic-modelos-datalake-svpc-services
       # Autoprovisioning is only supported in v1beta1.
       {% if properties['gkeApiVersion'] == 'v1beta1' and properties['autoprovisioning-config']['enabled'] %}
       autoscaling:
